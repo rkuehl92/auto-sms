@@ -18,6 +18,6 @@ app.get('/', function (req, res) {
     }
 
     else {
-        return res.redirect(301, 'http://ifisnull.com');
+        return res.redirect(301, 'http://example.com');
     }
 });

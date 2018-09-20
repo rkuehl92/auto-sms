@@ -1,4 +1,7 @@
 const express = require('express');
+const iosDict = require('./common/ios');
+const androidDict = require('./common/android');
+
 const port = 5555;
 const app = express();
 
@@ -7,14 +10,18 @@ app.listen(port, function () {
 });
 
 app.get('/', function (req, res) {
-    var userAgent = req.headers['user-agent'];
+    const userAgent = req.headers['user-agent'];
     
-    if (/Android/i.test(userAgent)) {
+    let i = new iosDict();
+    let a = new androidDict();
+
+    if (a.containsUserAgent(userAgent)) {
         return res.redirect(301, 'sms:74121?body=help');
     }
-
-    if (/iPad|iPhone|iPod/.test(userAgent)) {
+    
+    if (i.containsUserAgent(userAgent)) {
         return res.redirect(301, 'sms:74121&body=help');
+        
     }
 
     else {
